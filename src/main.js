@@ -1,11 +1,12 @@
+import MicroModal from "micromodal";
 import Split from "split.js";
 import { verifyAFD } from "./afd.js";
 import { renderError, renderOut, renderOutString } from "./animateNode.js";
-import { createAutomata, clearAutomata } from "./automata.js";
+import { clearAutomata, createAutomata } from "./automata.js";
 import { startDragTools } from "./dragTools.js";
-import { CANVAS_HEIGHT, initGraph } from "./graph.js";
-import { CircleShape, FILL_NODE_FINAL, NODE_WIDTH } from "./shapes.js";
-import MicroModal from "micromodal"; // es6 module
+import { initGraph } from "./graph.js";
+import { CircleShape, FILL_NODE_FINAL } from "./shapes.js";
+import download from "./utils/download.js";
 
 const { graph, paper } = initGraph();
 const inputString = document.querySelector("#input-string");
@@ -13,6 +14,7 @@ const inputEl = document.querySelector("#input-label-name");
 const inputLabel = document.querySelector("#input-label-name");
 const inputState = document.querySelector("#input-state-name");
 const btnClearAll = document.querySelector("#btn-clear-all");
+const btnDownload = document.querySelector("#btn-download");
 
 const automata = createAutomata();
 
@@ -151,3 +153,6 @@ btnClearAll.addEventListener("click", () => {
   clearAutomata(automata);
   graph.clear();
 });
+
+// Download png
+btnDownload.addEventListener("click", download);

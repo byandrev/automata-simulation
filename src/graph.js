@@ -117,9 +117,6 @@ function initGraph() {
 
   paper.on("element:pointerdblclick", function (elementView, evt) {
     const currentElement = elementView.model;
-    // const label = prompt("Label name?");
-    // currentElement.attr("label/text", label);
-    console.log(currentElement);
     const inputEl = document.querySelector("#input-state-name");
     MicroModal.show("modal-state-name");
     inputEl.setAttribute("state-id", currentElement.id);
