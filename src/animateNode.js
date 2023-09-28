@@ -6,14 +6,14 @@ function animateNode(
   state = "q0",
   symbol,
   isFinal,
-  color = "#008080"
+  color = "#f8d6ac"
 ) {
   const data = paper.model
     .getElements()
     .find((el) => el.attributes.attrs.label.text === state);
 
   data.attr("body/stroke", color);
-  data.attr("body/fill", "#21bcbc");
+  data.attr("body/fill", color);
 
   const links = graph.getConnectedLinks(data, { outbound: true });
 

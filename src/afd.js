@@ -6,6 +6,14 @@ function verifyAFD(paper, graph, automata, string) {
   let symbol = string[i];
 
   const interval = setInterval(() => {
+    animateNode(
+      paper,
+      graph,
+      state,
+      symbol,
+      automata.finalStates.includes(state)
+    );
+
     if (i >= string.length) {
       clearInterval(interval);
 
@@ -15,7 +23,7 @@ function verifyAFD(paper, graph, automata, string) {
       }
 
       renderOut("INVALID");
-      renderError("I do not end in a final state")
+      renderError("I do not end in a final state");
       return;
     }
 
@@ -34,14 +42,6 @@ function verifyAFD(paper, graph, automata, string) {
       renderOut("INVALID");
       return;
     }
-
-    animateNode(
-      paper,
-      graph,
-      state,
-      symbol,
-      automata.finalStates.includes(state)
-    );
 
     i++;
     state = isState.nextState;
