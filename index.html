@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lab. Automatas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="src/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/jointjs/3.7.5/joint.min.css"
+      integrity="sha512-GyvR5jC0OnZNT+eb5PR1OaRq4uSlkE+SrHK/T3DfKyUboA191W3aUiuCrErwtZuVdPMVu/Me595KD+rxXSe19w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+      integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"
+      integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.5.0/backbone-min.js"
+      integrity="sha512-NAJF/IIdtSJ5JxYalGv+g0xbnbHJTa0W24Gy21nImt+sBkjRWTOhoo+JAQvCw9A9WzCJmq/JVuijggiOkrdW1Q=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jointjs/3.7.5/joint.min.js"
+      integrity="sha512-pSAAtQw8Sz/OO4m9e2rLqIUe8pZVng7giqZgoBnFTkl3ovJJ6WHHxNgIY+q607xg3CHhWdZKih7oVofY5ENdxQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+  </head>
+  <body class="min-h-[100vh]">
+    <div class="border-b-[2px]">
+      <div class="bg-gray-100 px-8 py-2 flex justify-between items-center">
+        <div class="flex items-center gap-2">
+          <div class="mr-6 relative">
+            <h1 class="select-none">Automata Simulation</h1>
+            <span
+              class="bg-yellow-300 px-1 rounded text-[10px] absolute right-[-5px] top-[-5px]"
+              >BETA</span
+            >
+          </div>
+
+          <div class="pr-2">
+            <i class="fa-solid fa-screwdriver-wrench"></i>
+          </div>
+
+          <div
+            class="element bg-white cursor-pointer select-none rounded-full border-2 w-8 h-8 text-center leading-6 text-xs"
+            draggable="true"
+            title="State"
+          >
+            q
+          </div>
+
+          <div
+            class="element bg-white cursor-pointer select-none rounded-full border-2 w-8 h-8 text-center leading-6 text-xs"
+            draggable="true"
+            title="Final State"
+          >
+            qf
+          </div>
+        </div>
+
+        <div class="flex gap-4">
+          <a href="https://github.com/byandrev" target="_blank"
+            ><i class="fa-brands fa-github"></i
+          ></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="split">
+      <div id="paper" class="overflow-hidden"></div>
+      <div id="split-1" class="bg-gray-100 p-4 border-b-2">
+        <div class="flex items-center gap-2">
+          <input
+            type="text"
+            id="input-string"
+            placeholder="String"
+            class="w-full px-1 h-8 text-xs rounded border-2 border-slate-200 bg-slate-100"
+          />
+
+          <button
+            id="run"
+            class="rounded px-4 h-8 text-xs bg-blue-500 text-white hover:bg-blue-600 active:bg-blue-500"
+          >
+            Run
+          </button>
+        </div>
+
+        <div class="mt-4">
+          <p><span id="out"></span></p>
+          <p class="mt-2 text-xl" id="string-out"></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="container mx-auto my-10">
+      <h2 class="text-xl">How work?</h2>
+    </div>
+
+    <div
+      class="modal micromodal-slide"
+      id="modal-label-name"
+      aria-hidden="true"
+    >
+      <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+        <div
+          class="modal__container"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="modal-1-title"
+        >
+          <header class="modal__header">
+            <h2 class="modal__title" id="modal-1-title">Transition</h2>
+            <button
+              class="modal__close"
+              aria-label="Close modal"
+              data-micromodal-close
+            ></button>
+          </header>
+          <main class="modal__content" id="modal-1-content">
+            <input
+              type="text"
+              id="input-label-name"
+              class="p-2 rounded border-2"
+            />
+          </main>
+          <footer class="modal__footer">
+            <button id="btn-label-name" class="modal__btn modal__btn-primary">
+              Save
+            </button>
+            <button
+              class="modal__btn"
+              data-micromodal-close
+              aria-label="Close this dialog window"
+            >
+              Close
+            </button>
+          </footer>
+        </div>
+      </div>
+    </div>
+
+    <script src="src/main.js" type="module"></script>
+  </body>
+</html>
