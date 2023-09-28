@@ -72,8 +72,6 @@ function run() {
   automata.finalStates = finalStates;
   automata.transitions = transitions;
 
-  console.log(automata);
-
   renderOut("Loading ...");
   renderOutString(string);
   verifyAFD(paper, graph, automata, string);
@@ -114,7 +112,7 @@ window.addEventListener("DOMContentLoaded", () => {
   startDragTools(graph);
 
   const circle = new CircleShape({
-    position: { x: 50, y: CANVAS_HEIGHT / 2 - NODE_WIDTH },
+    position: { x: 50, y: 250 },
     attrs: { label: { text: "q0" } },
   });
 
