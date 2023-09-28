@@ -6,21 +6,27 @@
 git clone https://github.com/byandrev/automata-simulation
 ```
 
-
 ## Setup
 
 ```
 npm install
 ```
+
 ```
 npm run dev or yarn dev
 ```
 
+## ToDo
 
+- [ ] Support to AFND and AFNλ
+- [ ] Generate transition table
+- [ ] Generate automata from the transition table and viceversa
+- [ ] Run step by step
+- [ ] Customize animation velocity
+ 
 ## Contribution
 
 Thank you for considering contributing to our project! We welcome contributions from the community, whether it's for fixing existing issues, adding new features, or improving the documentation. Here's how you can contribute:
-
 
 - If you find an issue or have a feature request, please first check our "Issues" section to make sure it hasn't been reported before. If it's a new issue, you can open a new issue and provide a detailed description.
 
