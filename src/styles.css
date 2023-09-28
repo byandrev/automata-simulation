@@ -59,7 +59,6 @@ input:focus {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.6);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -67,7 +66,6 @@ input:focus {
 
 .modal__container {
   background-color: #fff;
-  padding: 30px;
   max-width: 500px;
   max-height: 100vh;
   border-radius: 4px;
@@ -212,4 +210,24 @@ input:focus {
 .micromodal-slide .modal__container,
 .micromodal-slide .modal__overlay {
   will-change: transform;
+}
+
+/* ANIMATIONS */
+.animate__fadeIn {
+  opacity: 0;
+  animation: fadeIn 0.5s ease-in-out forwards;
+}
+
+.animate__fadeInLoading {
+  opacity: 0;
+  animation: fadeIn 0.1s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }

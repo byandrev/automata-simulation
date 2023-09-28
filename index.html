@@ -77,13 +77,24 @@
           >
             qf
           </div>
+
+          <div
+            class="bg-white cursor-pointer select-none rounded-full border-2 w-8 h-8 text-center leading-6 text-xs"
+            title="Clear all"
+            id="btn-clear-all"
+          >
+            <i class="fa-solid fa-trash-can text-[10px]"></i>
+          </div>
         </div>
 
         <div class="flex gap-4">
           <a
             target="_blank"
             href="https://github.com/byandrev/automata-simulation"
-            ><i class="fa-brands fa-github"></i
+            class="bg-gray-600 shadow text-white flex items-center gap-2 rounded px-2 py-1"
+          >
+            <span class="text-xs block">Open Source</span>
+            <i class="fa-brands fa-github"></i
           ></a>
         </div>
       </div>
@@ -102,8 +113,9 @@
 
           <button
             id="run"
-            class="rounded px-4 h-8 text-xs bg-blue-500 text-white hover:bg-blue-600 active:bg-blue-500"
+            class="rounded flex items-center gap-2 shadow px-4 h-8 text-xs bg-blue-500 text-white hover:bg-blue-600 active:bg-blue-500"
           >
+            <i class="fa-solid fa-play"></i>
             Run
           </button>
         </div>
@@ -112,6 +124,8 @@
           <p><span id="out"></span></p>
           <p class="mt-2 text-xl" id="string-out"></p>
         </div>
+
+        <div class="mt-8" id="error"></div>
       </div>
     </div>
 
@@ -126,38 +140,51 @@
     >
       <div class="modal__overlay" tabindex="-1" data-micromodal-close>
         <div
-          class="modal__container"
           role="dialog"
           aria-modal="true"
           aria-labelledby="modal-1-title"
+          class="modal__container relative pt-4"
         >
-          <header class="modal__header">
-            <h2 class="modal__title" id="modal-1-title">Transition</h2>
-            <button
-              class="modal__close"
-              aria-label="Close modal"
-              data-micromodal-close
-            ></button>
-          </header>
-          <main class="modal__content" id="modal-1-content">
-            <input
-              type="text"
-              id="input-label-name"
-              class="p-2 rounded border-2"
-            />
-          </main>
-          <footer class="modal__footer">
-            <button id="btn-label-name" class="modal__btn modal__btn-primary">
-              Save
-            </button>
-            <button
-              class="modal__btn"
-              data-micromodal-close
-              aria-label="Close this dialog window"
-            >
-              Close
-            </button>
-          </footer>
+          <span
+            class="absolute top-[2px] left-0 text-xs bg-yellow-300 px-2 rounded-t"
+            >Label name</span
+          >
+          <input
+            type="text"
+            id="input-label-name"
+            class="p-2 rounded border-2"
+          />
+          <!-- <button id="btn-label-name" class="modal__btn modal__btn-primary">
+            Save
+          </button> -->
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="modal micromodal-slide"
+      id="modal-state-name"
+      aria-hidden="true"
+    >
+      <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="modal-1-title"
+          class="modal__container relative pt-4"
+        >
+          <span
+            class="absolute top-[2px] left-0 text-xs bg-yellow-300 px-2 rounded-t"
+            >State name</span
+          >
+          <input
+            type="text"
+            id="input-state-name"
+            class="p-2 rounded border-2"
+          />
+          <!-- <button id="btn-state-name" class="modal__btn modal__btn-primary">
+            Save
+          </button> -->
         </div>
       </div>
     </div>

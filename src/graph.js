@@ -94,7 +94,6 @@ function initGraph() {
         const inputEl = document.querySelector("#input-label-name");
         MicroModal.show("modal-label-name");
         inputEl.setAttribute("link-id", this.model.id);
-        // inputEl.value = this.model.attributes.labels[0].attrs.text.text;
       },
     }),
   });
@@ -118,8 +117,12 @@ function initGraph() {
 
   paper.on("element:pointerdblclick", function (elementView, evt) {
     const currentElement = elementView.model;
-    const label = prompt("Label name?");
-    currentElement.attr("label/text", label);
+    // const label = prompt("Label name?");
+    // currentElement.attr("label/text", label);
+    console.log(currentElement);
+    const inputEl = document.querySelector("#input-state-name");
+    MicroModal.show("modal-state-name");
+    inputEl.setAttribute("state-id", currentElement.id);
   });
 
   return { graph, paper };

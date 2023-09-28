@@ -1,4 +1,4 @@
-import { animateNode, renderOut } from "./animateNode.js";
+import { animateNode, renderError, renderOut } from "./animateNode.js";
 
 function verifyAFD(paper, graph, automata, string) {
   let i = 0;
@@ -15,6 +15,7 @@ function verifyAFD(paper, graph, automata, string) {
       }
 
       renderOut("INVALID");
+      renderError("I do not end in a final state")
       return;
     }
 
@@ -34,7 +35,13 @@ function verifyAFD(paper, graph, automata, string) {
       return;
     }
 
-    animateNode(paper, graph, state, symbol);
+    animateNode(
+      paper,
+      graph,
+      state,
+      symbol,
+      automata.finalStates.includes(state)
+    );
 
     i++;
     state = isState.nextState;
