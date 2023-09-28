@@ -12,6 +12,18 @@ input:focus {
   border-bottom: 2px #e5e7eb solid !important;
 }
 
+.joint-link.current path {
+  stroke-dasharray: 5;
+  stroke-dashoffset: 10;
+  animation: dash 0.5s infinite linear;
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
 .split {
   display: flex;
   flex-direction: row;

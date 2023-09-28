@@ -21,7 +21,11 @@ function animateNode(
     el.attributes.labels[0].attrs.text.text.split(",").includes(symbol)
   );
 
-  if (currentLink) currentLink.attr("line/stroke", "orange");
+  if (currentLink) {
+    currentLink.attr("line/stroke", "orange");
+    const svg = document.querySelector(`g[model-id="${currentLink.id}"]`);
+    svg.classList.add("current");
+  }
 
   setTimeout(() => {
     data.attr("body/stroke", "black");
@@ -29,7 +33,11 @@ function animateNode(
     if (!isFinal) data.attr("body/fill", "#ffffff");
     else data.attr("body/fill", FILL_NODE_FINAL);
 
-    if (currentLink) currentLink.attr("line/stroke", "black");
+    if (currentLink) {
+      currentLink.attr("line/stroke", "black");
+      const svg = document.querySelector(`g[model-id="${currentLink.id}"]`);
+      svg.classList.remove("current");
+    }
 
     document
       .querySelector("#string-out")
