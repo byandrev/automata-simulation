@@ -95,15 +95,19 @@
           </div>
         </div>
 
-        <div class="flex gap-4">
-          <a
-            target="_blank"
-            href="https://github.com/byandrev/automata-simulation"
-            class="bg-gray-600 shadow text-white flex items-center gap-2 rounded px-2 py-1"
-          >
-            <span class="text-xs block">Open Source</span>
-            <i class="fa-brands fa-github"></i
-          ></a>
+        <div class="flex items-center gap-4">
+          <a href="#how-to-use" class="text-sm underline">How to use?</a>
+
+          <div class="flex gap-4">
+            <a
+              target="_blank"
+              href="https://github.com/byandrev/automata-simulation"
+              class="bg-gray-600 shadow text-white flex items-center gap-2 rounded px-2 py-1"
+            >
+              <span class="text-xs block">Open Source</span>
+              <i class="fa-brands fa-github"></i
+            ></a>
+          </div>
         </div>
       </div>
     </div>
@@ -138,7 +142,7 @@
     </div>
 
     <main class="leading-7 container mx-auto">
-      <div class="my-10">
+      <div class="my-10" id="how-to-use">
         <h2 class="text-2xl font-bold mb-2">About</h2>
 
         <p>
@@ -156,6 +160,7 @@
 
       <div class="max-w-[800px] mx-auto">
         <video
+          loop="true"
           autoplay="true"
           src="/example-use.mp4"
           class="border-2 rounded"
@@ -233,8 +238,21 @@
       </div>
     </main>
 
-    <footer class="container mx-auto flex justify-between border-t-2 py-8">
-      <p>Automata Simulation</p>
+    <footer
+      class="container mx-auto flex justify-between items-end border-t-2 py-8"
+    >
+      <div>
+        <p>Automata Simulation</p>
+        <p>
+          <a
+            target="_blank"
+            href="https://ww2.ufps.edu.co"
+            class="text-blue-500 underline"
+            >UFPS</a
+          >
+          | Computer theory - Eduard Puerto
+        </p>
+      </div>
 
       <p>
         Development by
