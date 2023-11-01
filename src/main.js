@@ -7,6 +7,7 @@ import { startDragTools } from "./dragTools.js";
 import { initGraph } from "./graph.js";
 import { CircleShape, FILL_NODE_FINAL } from "./shapes.js";
 import download from "./utils/download.js";
+import { verifyAFND } from "./afnd.js";
 
 const { graph, paper } = initGraph();
 const inputString = document.querySelector("#input-string");
@@ -26,7 +27,7 @@ function run() {
   const alphabet = [];
   const string = inputString.value;
   const statesArr = [];
-  const transitions = [];
+  const transitions = {};
 
   // clear errors
   renderError(null);
@@ -38,6 +39,8 @@ function run() {
         id: el.attributes.id,
       };
 
+      transitions[el.attributes.attrs.label.text] = {};
+
       if (el.attributes.attrs.body.fill === FILL_NODE_FINAL) {
         finalStates.push(el.attributes.attrs.label.text);
       }
@@ -48,11 +51,24 @@ function run() {
     if (el.type === "Link") {
       alphabet.push(...el.labels[0].attrs.text.text.split(","));
 
-      transitions.push({
-        state: states[el.source.id].text,
-        symbol: el.labels[0].attrs.text.text.split(",") || "transition",
-        nextState: states[el.target.id].text,
+      el.labels[0].attrs.text.text.split(",").forEach((symbol) => {
+        if (transitions[states[el.source.id].text][symbol]) {
+          transitions[states[el.source.id].text][symbol] = [
+            ...transitions[states[el.source.id].text][symbol],
+            states[el.target.id].text,
+          ];
+        } else {
+          transitions[states[el.source.id].text][symbol] = [
+            states[el.target.id].text,
+          ];
+        }
       });
+
+      // transitions[state] = {
+      //   state: states[el.source.id].text,
+      //   symbol: el.labels[0].attrs.text.text.split(",") || "transition",
+      //   nextState: states[el.target.id].text,
+      // };
     }
   });
 
@@ -74,9 +90,14 @@ function run() {
   automata.finalStates = finalStates;
   automata.transitions = transitions;
 
+  console.log(automata);
+
   renderOut("Loading ...");
   renderOutString(string);
-  verifyAFD(paper, graph, automata, string);
+  // verifyAFD(paper, graph, automata, string);
+
+  const res = verifyAFND(paper, graph, automata, string);
+  console.log(res);
 }
 
 function changeLabelName() {
