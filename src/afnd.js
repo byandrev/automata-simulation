@@ -1,126 +1,68 @@
 import { animateNode, renderError, renderOut } from "./animateNode.js";
 
 function verifyAFND(paper, graph, automata, string) {
-  // function epsilonClosure(states) {
-  //   const epsilonClosureStates = new Set(states);
-  //   const stack = Array.from(states);
+  const steps = [];
 
-  //   while (stack.length > 0) {
-  //     const state = stack.pop();
+  const verify = (afd, currentState, string) => {
+    if (string.length <= 0) {
+      return afd.finalStates.includes(currentState);
+    }
 
-  //     if (automata.transitions[state] && automata.transitions[state]["ε"]) {
-  //       for (const nextState of automata.transitions[state]["ε"]) {
-  //         if (!epsilonClosureStates.has(nextState)) {
-  //           epsilonClosureStates.add(nextState);
-  //           stack.push(nextState);
-  //         }
-  //       }
-  //     }
-  //   }
+    for (let i = 0; i < afd.transitions[currentState].length; i++) {
+      const [nextState, symbol] = afd.transitions[currentState][i];
 
-  //   return epsilonClosureStates;
-  // }
+      if (symbol === string[0]) {
+        steps.push([currentState, symbol, nextState, string[0]]);
 
-  // function move(states, symbol) {
-  //   const nextStates = new Set();
+        if (verify(afd, nextState, string.slice(1))) {
+          return true;
+        }
+      } else if (symbol === "λ") {
+        steps.push([currentState, symbol, nextState, string[0]]);
 
-  //   for (const state of states) {
-  //     setTimeout(() => {
-  //       animateNode(
-  //         paper,
-  //         graph,
-  //         state,
-  //         symbol,
-  //         automata.finalStates.includes(state)
-  //       );
-
-  //       if (
-  //         automata.transitions[state] &&
-  //         automata.transitions[state][symbol]
-  //       ) {
-  //         for (const nextState of automata.transitions[state][symbol]) {
-  //           nextStates.add(nextState);
-  //         }
-  //       }
-  //     }, 1000);
-  //   }
-  //   return nextStates;
-  // }
-
-  // let i = 0;
-  // let currentStates = epsilonClosure(new Set([automata.initialState]));
-  // let symbol = string[i];
-
-  // const interval = setInterval(() => {
-  //   currentStates = epsilonClosure(move(currentStates, symbol));
-
-  //   if (i >= string.length) {
-  //     for (const state of currentStates) {
-  //       if (automata.finalStates.includes(state)) {
-  //         console.log("YES");
-  //         return true;
-  //       }
-  //     }
-
-  //     clearInterval(interval);
-  //   }
-
-  //   i++;
-  //   symbol = string[i];
-  // }, 1000);
-
-  const getNextStates = (states, symbol) => {
-    const nextStates = new Set();
-
-    for (const state of states) {
-      if (automata.transitions[state] && automata.transitions[state][symbol]) {
-        for (const nextState of automata.transitions[state][symbol]) {
-          nextStates.add(nextState);
+        if (verify(afd, nextState, string)) {
+          return true;
         }
       }
     }
 
-    return nextStates;
+    return false;
   };
 
-  let currentStates = [automata.initialState];
+  const res = verify(automata, automata.initialState, string);
 
-  const verify = (states, symbol) => {
-    let i = 0;
-    let state = states[0];
+  let indexStep = 0;
+  document.querySelector("#string-out").textContent = "";
 
-    const interval = setInterval(() => {
-      animateNode(
-        paper,
-        graph,
-        state,
-        symbol,
-        automata.finalStates.includes(state)
-      );
-
-      if (i >= string.length) {
-        clearInterval(interval);
-        return;
+  const interval = setInterval(() => {
+    if (indexStep >= steps.length) {
+      if (!res) {
+        renderOut("INVALID");
+      } else {
+        renderOut("VALID");
       }
 
-      states = getNextStates(states, symbol);
+      clearInterval(interval);
+      return;
+    }
 
-      if (states.length <= 0) {
-        return;
-      }
+    const step = steps[indexStep];
 
-      console.log("Current: ", states);
+    animateNode(
+      paper,
+      graph,
+      step[0],
+      step[1],
+      automata.finalStates.includes(step[0]),
+      step[2],
+    );
 
-      i++;
-      symbol = string[i];
+    document.querySelector("#string-out").textContent += step[3];
 
-      verify(states, symbol);
-    }, 1000);
-  };
+    indexStep++;
+  }, 1000);
 
-  verify(currentStates, string[0]);
-
-  return false;
+  return res;
 }
 
 export { verifyAFND };
