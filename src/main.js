@@ -51,12 +51,6 @@ function run() {
     if (el.type === "Link") {
       alphabet.push(...el.labels[0].attrs.text.text.split(","));
 
-      // transitions.push({
-      //   state: states[el.source.id].text,
-      //   symbol: el.labels[0].attrs.text.text.split(",") || "transition",
-      //   nextState: states[el.target.id].text,
-      // });
-
       el.labels[0].attrs.text.text.split(",").forEach((symbol) => {
         if (transitions[states[el.source.id].text].length >= 0) {
           transitions[states[el.source.id].text].push([

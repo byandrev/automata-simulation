@@ -57,7 +57,7 @@ function verifyAFND(paper, graph, automata, string) {
       step[2],
     );
 
-    document.querySelector("#string-out").textContent += step[3];
+    // document.querySelector("#string-out").textContent += step[3];
 
     indexStep++;
   }, 1000);
