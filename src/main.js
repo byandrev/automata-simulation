@@ -1,6 +1,7 @@
 import MicroModal from "micromodal";
 import Split from "split.js";
-import { verifyAFD } from "./afd.js";
+// import { verifyAFD } from "./afd.js";
+import { verifyAFND } from "./afnd.js";
 import { renderError, renderOut, renderOutString } from "./animateNode.js";
 import { clearAutomata, createAutomata } from "./automata.js";
 import { startDragTools } from "./dragTools.js";
@@ -10,7 +11,7 @@ import download from "./utils/download.js";
 
 const { graph, paper } = initGraph();
 const inputString = document.querySelector("#input-string");
-const inputEl = document.querySelector("#input-label-name");
+// const inputEl = document.querySelector("#input-label-name");
 const inputLabel = document.querySelector("#input-label-name");
 const inputState = document.querySelector("#input-state-name");
 const btnClearAll = document.querySelector("#btn-clear-all");
@@ -26,7 +27,7 @@ function run() {
   const alphabet = [];
   const string = inputString.value;
   const statesArr = [];
-  const transitions = [];
+  const transitions = {};
 
   // clear errors
   renderError(null);
@@ -38,6 +39,8 @@ function run() {
         id: el.attributes.id,
       };
 
+      transitions[el.attributes.attrs.label.text] = {};
+
       if (el.attributes.attrs.body.fill === FILL_NODE_FINAL) {
         finalStates.push(el.attributes.attrs.label.text);
       }
@@ -48,10 +51,17 @@ function run() {
     if (el.type === "Link") {
       alphabet.push(...el.labels[0].attrs.text.text.split(","));
 
-      transitions.push({
-        state: states[el.source.id].text,
-        symbol: el.labels[0].attrs.text.text.split(",") || "transition",
-        nextState: states[el.target.id].text,
+      el.labels[0].attrs.text.text.split(",").forEach((symbol) => {
+        if (transitions[states[el.source.id].text].length >= 0) {
+          transitions[states[el.source.id].text].push([
+            states[el.target.id].text,
+            symbol,
+          ]);
+        } else {
+          transitions[states[el.source.id].text] = [
+            [states[el.target.id].text, symbol],
+          ];
+        }
       });
     }
   });
@@ -74,9 +84,14 @@ function run() {
   automata.finalStates = finalStates;
   automata.transitions = transitions;
 
+  console.log(automata);
+
   renderOut("Loading ...");
   renderOutString(string);
-  verifyAFD(paper, graph, automata, string);
+  // verifyAFD(paper, graph, automata, string);
+
+  const res = verifyAFND(paper, graph, automata, string);
+  console.log(res);
 }
 
 function changeLabelName() {

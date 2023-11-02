@@ -18,7 +18,7 @@ npm run dev or yarn dev
 
 ## ToDo
 
-- [ ] Support to AFND and AFNλ
+- [x] Support to AFND and AFNλ
 - [ ] Generate transition table
 - [ ] Generate automata from the transition table and viceversa
 - [ ] Run step by step
