@@ -16,6 +16,7 @@ const inputLabel = document.querySelector("#input-label-name");
 const inputState = document.querySelector("#input-state-name");
 const btnClearAll = document.querySelector("#btn-clear-all");
 const btnDownload = document.querySelector("#btn-download");
+const header = document.querySelector("#table thead tr");
 
 const automata = createAutomata();
 
@@ -28,6 +29,12 @@ function run() {
   const string = inputString.value;
   const statesArr = [];
   const transitions = {};
+  const tableResult = document.getElementById("table");
+  
+  const principalRow = document.getElementById("body");
+  const row = document.querySelector("tbody");
+  const symbolIndex = new Array();
+  
 
   // clear errors
   renderError(null);
@@ -84,7 +91,103 @@ function run() {
   automata.finalStates = finalStates;
   automata.transitions = transitions;
 
-  console.log(automata);
+
+  
+  
+  
+  //Transition table
+  row.innerHTML = "";
+  reload(tableResult, header);
+
+  //console.log(automata.alphabet);
+  automata.alphabet.forEach((x) => {
+    if(symbolIndex.indexOf(x) == -1){
+    symbolIndex.push(x);
+    const column = document.createElement("th");
+    column.textContent = x;
+    column.classList.add("px-6", "py-3", "bg-gray-300");
+    header.appendChild(column);
+    tableResult.appendChild(header);
+    }
+  });
+
+  let index = 0;
+  
+  //Add States in a Row
+  //automata.states.forEach((x) => {
+    for(let i = 0; i < automata.states.length; i++){
+    const newRow = document.createElement("tr");
+    const newRowState = document.createElement("th");
+    newRowState.textContent = automata.states[i];
+    newRowState.classList.add(
+      "px-6",
+      "py-4",
+      "font-medium",
+      "text-gray-900",
+      "whitespace-nowrap"
+    );
+    
+    //State in column State
+    newRow.appendChild(newRowState);
+    const infoStates = []
+
+    
+    //Get nextState
+    const states =  Object.values(automata.transitions);
+    console.log(states);
+    let stateNumber = states[index].length;
+  
+    //Iterate States
+    let elements;
+    for(let i=0; i < stateNumber; i++){
+      let info = states[index][i][0];
+      let found = symbolIndex.indexOf(states[index][i][1]);
+      //console.log("Simbolo ", found);
+      if(infoStates[found]){
+        infoStates[found] += "," + info;
+        elements = infoStates[found];
+      }else{
+        infoStates[found] = info;
+      }
+      }
+
+      if(elements){automata.states.push(elements);}
+      console.log(automata.states);
+
+      index++;
+      
+      infoStates.forEach((x) => {
+      const newRowState1 = document.createElement("th");
+      newRowState1.textContent = x;
+      newRowState1.classList.add(
+        "px-6",
+        "py-4",
+        "font-medium",
+        "text-gray-900",
+        "whitespace-nowrap"
+      );
+
+      let size = infoStates.length;
+      let indexState = infoStates.indexOf(x);
+      let count = 0;
+
+      while (size--) {
+        const aux = document.createElement("th");
+        if(count == indexState){
+          newRow.appendChild(newRowState1);
+          break;
+        }else{
+          newRow.appendChild(aux);
+        }
+        count++;
+      }
+      principalRow.appendChild(newRow);
+      tableResult.appendChild(principalRow);
+    });
+   // });
+  }
+
+    
 
   renderOut("Loading ...");
   renderOutString(string);
@@ -121,6 +224,15 @@ function changeStateName() {
   inputState.value = "";
   MicroModal.close("modal-state-name");
 }
+
+function reload(tableResult, header){
+  header.innerHTML = "";
+  const column = document.createElement("th");
+  column.textContent = "States";
+  column.classList.add("px-6", "py-3", "bg-gray-300");
+  header.appendChild(column);
+  tableResult.appendChild(header);
+};
 
 window.addEventListener("DOMContentLoaded", () => {
   MicroModal.init();
