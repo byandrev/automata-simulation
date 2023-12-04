@@ -171,3 +171,4 @@ btnClearAll.addEventListener("click", () => {
 
 // Download png
 btnDownload.addEventListener("click", download);
+

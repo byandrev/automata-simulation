@@ -11,40 +11,34 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
       integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
       crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
+      referrerpolicy="no-referrer" />
 
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/jointjs/3.7.5/joint.min.css"
       integrity="sha512-GyvR5jC0OnZNT+eb5PR1OaRq4uSlkE+SrHK/T3DfKyUboA191W3aUiuCrErwtZuVdPMVu/Me595KD+rxXSe19w=="
       crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
+      referrerpolicy="no-referrer" />
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
       integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
       crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    ></script>
+      referrerpolicy="no-referrer"></script>
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"
       integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ=="
       crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    ></script>
+      referrerpolicy="no-referrer"></script>
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.5.0/backbone-min.js"
       integrity="sha512-NAJF/IIdtSJ5JxYalGv+g0xbnbHJTa0W24Gy21nImt+sBkjRWTOhoo+JAQvCw9A9WzCJmq/JVuijggiOkrdW1Q=="
       crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    ></script>
+      referrerpolicy="no-referrer"></script>
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/jointjs/3.7.5/joint.min.js"
       integrity="sha512-pSAAtQw8Sz/OO4m9e2rLqIUe8pZVng7giqZgoBnFTkl3ovJJ6WHHxNgIY+q607xg3CHhWdZKih7oVofY5ENdxQ=="
       crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    ></script>
+      referrerpolicy="no-referrer"></script>
   </head>
   <body class="min-h-[100vh]">
     <div class="border-b-[2px]">
@@ -65,34 +59,38 @@
           <div
             class="element bg-white cursor-pointer select-none rounded-full border-2 w-8 h-8 text-center leading-6 text-xs"
             draggable="true"
-            title="State"
-          >
+            title="State">
             q
           </div>
 
           <div
             class="element bg-white cursor-pointer select-none rounded-full border-2 w-8 h-8 text-center leading-6 text-xs"
             draggable="true"
-            title="Final State"
-          >
+            title="Final State">
             qf
           </div>
 
           <div
             class="bg-white cursor-pointer select-none rounded-full border-2 w-8 h-8 text-center leading-6 text-xs"
             title="Clear all"
-            id="btn-clear-all"
-          >
+            id="btn-clear-all">
             <i class="fa-solid fa-trash-can text-[10px]"></i>
           </div>
 
           <div
             class="bg-white cursor-pointer select-none rounded-full border-2 w-8 h-8 text-center leading-6 text-xs"
             title="Download"
-            id="btn-download"
-          >
+            id="btn-download">
             <i class="fa-solid fa-cloud-arrow-down text-[10px]"></i>
           </div>
+
+          <select
+            class="change-simulator"
+            id="changeSim"
+            onchange="changeSimulator()">
+            <option value="Automata-Simulator">AFD Simulator</option>
+            <option value="Turing-Machine-Simulator">TM Simulator</option>
+          </select>
         </div>
 
         <div class="flex items-center gap-4">
@@ -102,8 +100,7 @@
             <a
               target="_blank"
               href="https://github.com/byandrev/automata-simulation"
-              class="bg-gray-600 shadow text-white flex items-center gap-2 rounded px-2 py-1"
-            >
+              class="bg-gray-600 shadow text-white flex items-center gap-2 rounded px-2 py-1">
               <span class="text-xs block">Open Source</span>
               <i class="fa-brands fa-github"></i
             ></a>
@@ -120,13 +117,11 @@
             type="text"
             id="input-string"
             placeholder="String"
-            class="w-full px-1 h-8 text-xs rounded border-2 border-slate-200 bg-slate-100"
-          />
+            class="w-full px-1 h-8 text-xs rounded border-2 border-slate-200 bg-slate-100" />
 
           <button
             id="run"
-            class="rounded flex items-center gap-2 shadow px-4 h-8 text-xs bg-blue-500 text-white hover:bg-blue-600 active:bg-blue-500"
-          >
+            class="rounded flex items-center gap-2 shadow px-4 h-8 text-xs bg-blue-500 text-white hover:bg-blue-600 active:bg-blue-500">
             <i class="fa-solid fa-play"></i>
             Run
           </button>
@@ -164,8 +159,7 @@
           autoplay="true"
           src="/example-use.mp4"
           class="border-2 rounded"
-          alt="create, modify, and simulate automata"
-        ></video>
+          alt="create, modify, and simulate automata"></video>
 
         <p class="text-center text-sm font-bold underline">
           Rename states and transitions with double click
@@ -183,8 +177,8 @@
             <i class="fa-regular fa-square-check"></i> Generate transition table
           </li>
           <li>
-            <i class="fa-regular fa-square-check"></i> Generate automata from the
-            transition table and viceversa
+            <i class="fa-regular fa-square-check"></i> Generate automata from
+            the transition table and viceversa
           </li>
           <li><i class="fa-regular fa-square-check"></i> Run step by step</li>
           <li>
@@ -261,8 +255,7 @@
     </main>
 
     <footer
-      class="container mx-auto flex justify-between items-end border-t-2 py-8 px-2"
-    >
+      class="container mx-auto flex justify-between items-end border-t-2 py-8 px-2">
       <div>
         <p>Automata Simulation</p>
         <p>
@@ -276,23 +269,19 @@
         </p>
       </div>
 
-      <p>
-        Development with ❤️
-      </p>
+      <p>Development with ❤️</p>
     </footer>
 
     <div
       class="modal micromodal-slide"
       id="modal-label-name"
-      aria-hidden="true"
-    >
+      aria-hidden="true">
       <div class="modal__overlay" tabindex="-1" data-micromodal-close>
         <div
           role="dialog"
           aria-modal="true"
           aria-labelledby="modal-1-title"
-          class="modal__container relative pt-4"
-        >
+          class="modal__container relative pt-4">
           <span
             class="absolute top-[2px] left-0 text-xs bg-yellow-300 px-2 rounded-t"
             >Label name</span
@@ -300,8 +289,7 @@
           <input
             type="text"
             id="input-label-name"
-            class="p-2 rounded border-2"
-          />
+            class="p-2 rounded border-2" />
           <!-- <button id="btn-label-name" class="modal__btn modal__btn-primary">
             Save
           </button> -->
@@ -312,15 +300,13 @@
     <div
       class="modal micromodal-slide"
       id="modal-state-name"
-      aria-hidden="true"
-    >
+      aria-hidden="true">
       <div class="modal__overlay" tabindex="-1" data-micromodal-close>
         <div
           role="dialog"
           aria-modal="true"
           aria-labelledby="modal-1-title"
-          class="modal__container relative pt-4"
-        >
+          class="modal__container relative pt-4">
           <span
             class="absolute top-[2px] left-0 text-xs bg-yellow-300 px-2 rounded-t"
             >State name</span
@@ -328,15 +314,32 @@
           <input
             type="text"
             id="input-state-name"
-            class="p-2 rounded border-2"
-          />
+            class="p-2 rounded border-2" />
           <!-- <button id="btn-state-name" class="modal__btn modal__btn-primary">
             Save
           </button> -->
         </div>
       </div>
     </div>
+    <script>
+      // Load Turing Machine Simulator
+      function changeSimulator() {
+        var select = document.getElementById("changeSim");
+        if (select) {
+          var options = select.options[select.selectedIndex].value;      
+          if (options === "Automata-Simulator") {
+            console.log("xd1");
 
+          }
+          else if(options === "Turing-Machine-Simulator"){
+            console.log("xd2");
+
+          }
+        } else {
+          console.error("Element not found");
+        }
+      }
+    </script>
     <script src="src/main.js" type="module"></script>
   </body>
 </html>
