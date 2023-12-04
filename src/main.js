@@ -17,7 +17,6 @@ const inputState = document.querySelector("#input-state-name");
 const btnClearAll = document.querySelector("#btn-clear-all");
 const btnDownload = document.querySelector("#btn-download");
 const header = document.querySelector("#table thead tr");
-
 const automata = createAutomata();
 
 function run() {
@@ -34,6 +33,7 @@ function run() {
   const principalRow = document.getElementById("body");
   const row = document.querySelector("tbody");
   const symbolIndex = new Array();
+  
   
 
   // clear errors
@@ -113,6 +113,7 @@ function run() {
 
   let index = 0;
   
+  
   //Add States in a Row
   //automata.states.forEach((x) => {
     for(let i = 0; i < automata.states.length; i++){
@@ -134,14 +135,18 @@ function run() {
     
     //Get nextState
     const states =  Object.values(automata.transitions);
-    console.log(states);
+    console.log(states[index], index);
     let stateNumber = states[index].length;
   
     //Iterate States
     let elements;
+    
+
     for(let i=0; i < stateNumber; i++){
       let info = states[index][i][0];
+      console.log("Info", info);
       let found = symbolIndex.indexOf(states[index][i][1]);
+      console.log("Simbolo", states[index][i][1]);
       //console.log("Simbolo ", found);
       if(infoStates[found]){
         infoStates[found] += "," + info;
@@ -152,10 +157,11 @@ function run() {
       }
 
       if(elements){automata.states.push(elements);}
-      console.log(automata.states);
+      //console.log("Elementos", elements)
 
       index++;
       
+      let count = 0;
       infoStates.forEach((x) => {
       const newRowState1 = document.createElement("th");
       newRowState1.textContent = x;
@@ -169,12 +175,12 @@ function run() {
 
       let size = infoStates.length;
       let indexState = infoStates.indexOf(x);
-      let count = 0;
-
+      console.log(x);
       while (size--) {
         const aux = document.createElement("th");
         if(count == indexState){
           newRow.appendChild(newRowState1);
+          count++;
           break;
         }else{
           newRow.appendChild(aux);
