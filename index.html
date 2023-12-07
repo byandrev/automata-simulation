@@ -86,8 +86,7 @@
 
           <select
             class="change-simulator"
-            id="changeSim"
-            onchange="changeSimulator()">
+            id="btn-changeSim">
             <option value="Automata-Simulator">AFD Simulator</option>
             <option value="Turing-Machine-Simulator">TM Simulator</option>
           </select>
@@ -321,25 +320,6 @@
         </div>
       </div>
     </div>
-    <script>
-      // Load Turing Machine Simulator
-      function changeSimulator() {
-        var select = document.getElementById("changeSim");
-        if (select) {
-          var options = select.options[select.selectedIndex].value;      
-          if (options === "Automata-Simulator") {
-            console.log("xd1");
-
-          }
-          else if(options === "Turing-Machine-Simulator"){
-            console.log("xd2");
-
-          }
-        } else {
-          console.error("Element not found");
-        }
-      }
-    </script>
     <script src="src/main.js" type="module"></script>
   </body>
 </html>
