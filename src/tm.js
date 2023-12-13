@@ -24,84 +24,97 @@ let running = false;
 const machine = createAutomata();
 
 function run() {
+  const LIMIT = 100;
   const steps = [];
-  const string = inputString.value;
 
   running = true;
 
-  loadTape();
+  let currentTape = Array(200).fill("");
+  let currentHead = parseInt(currentTape.length / 2);
+  let input = inputString.value;
 
-  console.log(machine);
+  head = parseInt(tape.length / 2);
+  loadTape(input, currentTape);
+  loadTape(input, tape);
 
-  const verify = (machine, currentState, string) => {
+  const verify = (machine) => {
+    let currentState = machine.initialState;
+    let currentSymbol = "";
+
     if (machine.finalStates.includes(currentState)) {
       return true;
     }
 
-    if (string.length <= 0) {
-      return machine.finalStates.includes(currentState);
-    }
+    let i = 0;
 
-    for (let i = 0; i < machine.transitions[currentState].length; i++) {
-      const [nextState, symbol, moveTape, setTape] =
-        machine.transitions[currentState][i];
+    while (!machine.finalStates.includes(currentState) && i < LIMIT) {
+      currentSymbol = currentTape[currentHead];
 
-      if (symbol === string[0]) {
+      const state = currentState
+        ? machine.transitions[currentState].filter(
+            (el) => el[1] == currentSymbol
+          )
+        : [];
+
+      // Transicion
+      if (state && state.length === 1) {
+        const [nextState, symbol, moveTape, symbolToTape] = state[0];
+
         steps.push([
           currentState,
           symbol,
           nextState,
-          string[0],
+          currentTape[currentHead],
           moveTape,
-          setTape,
+          symbolToTape,
         ]);
 
-        if (verify(machine, nextState, string.slice(1))) {
-          return true;
-        }
-      } else if (symbol === "λ") {
-        steps.push([
-          currentState,
-          symbol,
-          nextState,
-          string[0],
-          moveTape,
-          setTape,
-        ]);
+        setTape(symbolToTape, currentTape, currentHead);
 
-        if (verify(machine, nextState, string)) {
-          return true;
+        if (moveTape === "R") {
+          currentHead++;
+        } else {
+          currentHead--;
         }
+
+        currentState = nextState;
+      } else {
+        break;
       }
-    }
 
-    return false;
+      // console.log(i);
+      i++;
+    }
   };
 
-  const res = verify(machine, machine.initialState, string);
+  running = false;
+  const res = verify(machine);
 
   console.log("Resultado: " + res);
   console.log(steps);
+
+  console.log("Tape: ");
+  console.log(currentTape);
+
+  console.log("Head: ", currentHead);
 
   let indexStep = 0;
 
   const interval = setInterval(() => {
     if (indexStep >= steps.length) {
-      if (!res) {
-        alert("INVALID");
-      } else {
-        alert("VALID");
-      }
-
       running = false;
       clearInterval(interval);
       return;
     }
 
     const step = steps[indexStep];
+    console.log(step);
+    setTape(step[5], tape, head);
+    moveTape(step[4] === "R" ? "right" : "left", tape, head);
+    renderTape(tape, head);
+    console.log("Head => ", head);
 
-    setTape(step[5]);
-    moveTape(step[4] === "R" ? "right" : "left");
+    console.log(tape);
 
     animateNode(
       paper,
@@ -114,17 +127,14 @@ function run() {
 
     indexStep++;
   }, 1000);
-
-  // restart head position
-  head = parseInt(tape.length / 2);
 }
 
-function loadTape() {
+function loadTape(input, tape) {
   head = parseInt(tape.length / 2);
 
   clearTapeDisplay();
 
-  const input = inputString.value;
+  renderTape(tape, head);
 
   for (let i = 0; i < input.length; i++) {
     tape[head + i] = input[i];
@@ -214,17 +224,19 @@ function loadMachine() {
 }
 
 function moveTape(direction = "right") {
-  if (direction === "right") head++;
-  else head--;
+  if (direction === "right") head += 1;
+  else head -= 1;
 
   for (let i = 0; i < tape.length && i < tapeItems.length; i++) {
     tapeItems[i].textContent = tape[head + i - 5];
   }
 }
 
-function setTape(element) {
+function setTape(element, tape, head) {
   tape[head] = element;
+}
 
+function renderTape(tape, head) {
   for (let i = 0; i < tape.length && i < tapeItems.length; i++) {
     tapeItems[i].textContent = tape[head + i - 5];
   }
@@ -310,5 +322,8 @@ btnRun.addEventListener("click", () => {
   run();
 });
 
-btnLoad.addEventListener("click", loadTape);
+btnLoad.addEventListener("click", () => {
+  tape = Array(200).fill("");
+  loadTape(inputString.value, tape);
+});
 btnDownload.addEventListener("click", download);

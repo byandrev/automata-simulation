@@ -25,7 +25,7 @@ function animateNode(
   );
   const currentLink = links.find(
     (el) =>
-      el.attributes.labels[0].attrs.text.text.split(",").includes(symbol) &&
+      el.attributes.labels[0].attrs.text.text.split(";").includes(symbol) &&
       el.attributes.target.id === nodeTarget.id
   );
 
