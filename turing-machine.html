@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Automata Simulation</title>
+    <title>Turing Machine - Automata Simulation</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="src/styles.css" />
     <link
@@ -46,7 +46,7 @@
       referrerpolicy="no-referrer"
     ></script>
   </head>
-  <body class="min-h-[100vh]">
+  <body>
     <div class="border-b-[2px]">
       <div class="bg-gray-100 px-8 py-2 flex justify-between items-center">
         <div class="flex items-center gap-2">
@@ -100,6 +100,7 @@
 
           <div class="flex gap-4">
             <a
+              rel="noopener"
               target="_blank"
               href="https://github.com/byandrev/automata-simulation"
               class="bg-gray-600 shadow text-white flex items-center gap-2 rounded px-2 py-1"
@@ -112,153 +113,79 @@
       </div>
     </div>
 
-    <div class="split at">
-      <div id="paper" class="overflow-hidden"></div>
-      <div id="split-1" class="bg-gray-100 p-4 border-b-2">
-        <div class="flex items-center gap-2">
+    <div class="main-mt w-full mt">
+      <div
+        class="px-6 border-2 border-gray-100 py-[25px] h-[100px] flex items-center"
+      >
+        <div class="w-[20%] flex gap-1">
           <input
             type="text"
             id="input-string"
             placeholder="String"
             class="w-full px-1 h-8 text-xs rounded border-2 border-slate-200 bg-slate-100"
           />
-
           <button
-            id="run"
+            id="btn-load"
+            class="rounded flex items-center gap-2 shadow px-4 h-8 text-xs bg-blue-500 text-white hover:bg-blue-600 active:bg-blue-500"
+          >
+            <i class="fa-solid fa-play"></i>
+            Load
+          </button>
+        </div>
+
+        <div id="tape" class="w-[60%] h-[50px] relative flex justify-center">
+          <div
+            class="tape-item w-[50px] h-full bg-blue-400 border-2 border-white"
+          ></div>
+          <div
+            class="tape-item w-[50px] h-full bg-blue-400 border-2 border-white"
+          ></div>
+          <div
+            class="tape-item w-[50px] h-full bg-blue-400 border-2 border-white"
+          ></div>
+          <div
+            class="tape-item w-[50px] h-full bg-blue-400 border-2 border-white"
+          ></div>
+          <div
+            class="tape-item w-[50px] h-full bg-blue-400 border-2 border-white"
+          ></div>
+          <div
+            class="tape-item w-[50px] h-full bg-blue-400 border-2 border-white"
+          ></div>
+          <div
+            class="tape-item w-[50px] h-full bg-blue-400 border-2 border-white"
+          ></div>
+          <div
+            class="tape-item w-[50px] h-full bg-blue-400 border-2 border-white"
+          ></div>
+          <div
+            class="tape-item w-[50px] h-full bg-blue-400 border-2 border-white"
+          ></div>
+          <div
+            class="tape-item w-[50px] h-full bg-blue-400 border-2 border-white"
+          ></div>
+          <div
+            class="tape-item w-[50px] h-full bg-blue-400 border-2 border-white"
+          ></div>
+
+          <div
+            id="cursor"
+            class="bg-yellow-500 w-[20px] h-[20px] absolute bottom-[-15px]"
+          ></div>
+        </div>
+
+        <div class="w-[20%] flex justify-end">
+          <button
+            id="btn-run"
             class="rounded flex items-center gap-2 shadow px-4 h-8 text-xs bg-blue-500 text-white hover:bg-blue-600 active:bg-blue-500"
           >
             <i class="fa-solid fa-play"></i>
             Run
           </button>
         </div>
-
-        <div class="mt-4">
-          <p><span id="out"></span></p>
-          <p class="mt-2 text-xl" id="string-out"></p>
-        </div>
-
-        <div class="mt-8" id="error"></div>
       </div>
+      <div id="paper" class="overflow-hidden"></div>
     </div>
-
-    <main class="leading-7 container mx-auto px-2">
-      <div class="my-10" id="how-to-use">
-        <h2 class="text-2xl font-bold mb-2">About</h2>
-
-        <p>
-          This open-source software provides users with the ability to create,
-          modify, and simulate automata efficiently and effectively. Through an
-          intuitive interface, users can define states, transitions, and
-          conditions, allowing them to visualize how an automaton responds to
-          different inputs or scenarios.
-        </p>
-
-        <p class="font-bold underline">
-          At the moment, it only works with DFA (Deterministic Finite Automata).
-        </p>
-      </div>
-
-      <div class="max-w-[800px] mx-auto">
-        <video
-          loop="true"
-          autoplay="true"
-          src="/example-use.mp4"
-          class="border-2 rounded"
-          alt="create, modify, and simulate automata"
-        ></video>
-
-        <p class="text-center text-sm font-bold underline">
-          Rename states and transitions with double click
-        </p>
-      </div>
-
-      <div class="my-10">
-        <h2 class="text-2xl font-bold mb-2">ToDo</h2>
-
-        <ul class="ml-2">
-          <li>
-            <i class="fa-solid fa-square-check"></i> Support to AFND and AFN λ
-          </li>
-          <li>
-            <i class="fa-regular fa-square-check"></i> Generate transition table
-          </li>
-          <li>
-            <i class="fa-regular fa-square-check"></i> Generate automata from the
-            transition table and viceversa
-          </li>
-          <li><i class="fa-regular fa-square-check"></i> Run step by step</li>
-          <li>
-            <i class="fa-regular fa-square-check"></i> Customize animation
-            velocity
-          </li>
-        </ul>
-      </div>
-
-      <div class="my-10">
-        <h3 class="text-2xl font-bold mb-2">Collaborate</h3>
-
-        <p class="mb-4">
-          Thank you for considering contributing to our project! We welcome
-          contributions from the community, whether it's for fixing existing
-          issues, adding new features, or improving the documentation. Here's
-          how you can contribute:
-        </p>
-
-        <p class="mb-4">
-          If you find an issue or have a feature request, please first check our
-          "Issues" section to make sure it hasn't been reported before. If it's
-          a new issue, you can open a new issue and provide a detailed
-          description.
-        </p>
-
-        <p class="mb-4">
-          If you want to contribute with code, follow these steps:
-        </p>
-
-        <ol class="list-decimal ml-6 mb-4">
-          <li>
-            Fork this repository and clone your copy to your local machine.
-          </li>
-          <li>
-            Create a new branch for your contribution: git branch branch-name.
-          </li>
-          <li>Make the necessary changes to the code.</li>
-          <li>Ensure your changes follow our code style guidelines.</li>
-          <li>
-            Commit your changes: git commit -m 'Description of the changes'.
-          </li>
-          <li>
-            Push your changes to your remote repository: git push origin
-            branch-name.
-          </li>
-          <li>
-            Open a pull request on our main repository, describing the changes
-            made and providing any additional context.
-          </li>
-        </ol>
-
-        <p class="mb-4">
-          Github:
-          <a
-            target="_blank"
-            class="text-blue-500 underline"
-            href="https://github.com/byandrev/automata-simulation"
-            >https://github.com/byandrev/automata-simulation</a
-          >
-        </p>
-
-        <p>
-          If you have any questions or need further information, feel free to
-          contact us via
-          <a
-            class="underline text-blue-500"
-            href="https://twitter.com/byandrev"
-            target="_blank"
-            >twitter</a
-          >.
-        </p>
-      </div>
-    </main>
 
     <footer
       class="container mx-auto flex justify-between items-end border-t-2 py-8 px-2"
@@ -267,6 +194,7 @@
         <p>Automata Simulation</p>
         <p>
           <a
+            rel="noopener"
             target="_blank"
             href="https://ww2.ufps.edu.co"
             class="text-blue-500 underline"
@@ -276,9 +204,7 @@
         </p>
       </div>
 
-      <p>
-        Development with ❤️
-      </p>
+      <p>Development with ❤️</p>
     </footer>
 
     <div
@@ -337,6 +263,6 @@
       </div>
     </div>
 
-    <script src="src/main.js" type="module"></script>
+    <script src="src/tm.js" type="module"></script>
   </body>
 </html>

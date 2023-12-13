@@ -263,3 +263,25 @@ input:focus {
     opacity: 1;
   }
 }
+
+.main-mt {
+  width: 100%;
+  height: calc(100vh - 50px);
+}
+
+.at > #paper {
+  height: calc(100vh - 50px);
+}
+
+.main-mt > #paper {
+  width: 100% !important;
+  height: calc(100vh - 150px);
+}
+
+.main-mt .tape-item {
+  text-align: center;
+  line-height: 1.7;
+  font-size: 1.5rem;
+  color: #fff;
+  user-select: none;
+}

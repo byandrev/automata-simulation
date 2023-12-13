@@ -1,6 +1,6 @@
 import MicroModal from "micromodal";
 import Split from "split.js";
-// import { verifyAFD } from "./afd.js";
+
 import { verifyAFND } from "./afnd.js";
 import { renderError, renderOut, renderOutString } from "./animateNode.js";
 import { clearAutomata, createAutomata } from "./automata.js";
@@ -11,7 +11,6 @@ import download from "./utils/download.js";
 
 const { graph, paper } = initGraph();
 const inputString = document.querySelector("#input-string");
-// const inputEl = document.querySelector("#input-label-name");
 const inputLabel = document.querySelector("#input-label-name");
 const inputState = document.querySelector("#input-state-name");
 const btnClearAll = document.querySelector("#btn-clear-all");

@@ -5,7 +5,7 @@ const { dia, shapes, connectors } = joint;
 const { TangentDirections } = connectors.curve;
 
 const CANVAS_WIDTH = document.querySelector("#paper").clientWidth;
-const CANVAS_HEIGHT = document.body.scrollHeight - 50;
+const CANVAS_HEIGHT = document.querySelector("#paper").clientHeight;
 
 // Theme
 const highlighterAttributes = {
@@ -43,6 +43,7 @@ function initGraph() {
     snapLinks: true,
     interactive: { labelMove: false },
     labelsLayer: true,
+    height: CANVAS_HEIGHT,
 
     highlighting: {
       default: {
