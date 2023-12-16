@@ -93,6 +93,16 @@
           >
             <i class="fa-solid fa-cloud-arrow-down text-[10px]"></i>
           </div>
+
+          <select
+            id="changeSim"
+            class="change-simulator"
+            onchange="changeSimulator()"
+          >
+            <option value="Automata-Simulator">AFD Simulator</option>
+
+            <option value="Turing-Machine-Simulator">TM Simulator</option>
+          </select>
         </div>
 
         <div class="flex items-center gap-4">
@@ -183,8 +193,8 @@
             <i class="fa-regular fa-square-check"></i> Generate transition table
           </li>
           <li>
-            <i class="fa-regular fa-square-check"></i> Generate automata from the
-            transition table and viceversa
+            <i class="fa-regular fa-square-check"></i> Generate automata from
+            the transition table and viceversa
           </li>
           <li><i class="fa-regular fa-square-check"></i> Run step by step</li>
           <li>
@@ -276,9 +286,7 @@
         </p>
       </div>
 
-      <p>
-        Development with ❤️
-      </p>
+      <p>Development with ❤️</p>
     </footer>
 
     <div
@@ -338,5 +346,19 @@
     </div>
 
     <script src="src/main.js" type="module"></script>
+
+    <script>
+      function changeSimulator(e) {
+        const select = document.querySelector("#changeSim");
+        console.log(select.value);
+        const currentPath = window.location.pathname;
+
+        if (select.value === "Automata-Simulator") {
+          window.location.href = "/";
+        } else {
+          window.location.href = "/turing-machine.html";
+        }
+      }
+    </script>
   </body>
 </html>

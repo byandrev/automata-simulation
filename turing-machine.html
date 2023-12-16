@@ -93,6 +93,17 @@
           >
             <i class="fa-solid fa-cloud-arrow-down text-[10px]"></i>
           </div>
+
+          <select
+            id="changeSim"
+            class="change-simulator"
+            onchange="changeSimulator()"
+          >
+            <option value="Automata-Simulator">AFD Simulator</option>
+            <option value="Turing-Machine-Simulator" selected>
+              TM Simulator
+            </option>
+          </select>
         </div>
 
         <div class="flex items-center gap-4">
@@ -150,7 +161,7 @@
             class="tape-item w-[50px] h-full bg-blue-400 border-2 border-white"
           ></div>
           <div
-            class="tape-item w-[50px] h-full bg-blue-400 border-2 border-white"
+            class="tape-item tape-item-middle w-[50px] h-full bg-blue-400 border-2 border-white"
           ></div>
           <div
             class="tape-item w-[50px] h-full bg-blue-400 border-2 border-white"
@@ -170,7 +181,7 @@
 
           <div
             id="cursor"
-            class="bg-yellow-500 w-[20px] h-[20px] absolute bottom-[-15px]"
+            class="absolute bottom-[-15px]"
           ></div>
         </div>
 
@@ -264,5 +275,19 @@
     </div>
 
     <script src="src/tm.js" type="module"></script>
+
+    <script>
+      function changeSimulator(e) {
+        const select = document.querySelector("#changeSim");
+        console.log(select.value);
+        const currentPath = window.location.pathname;
+
+        if (select.value === "Automata-Simulator") {
+          window.location.href = "/";
+        } else {
+          window.location.href = "/turing-machine.html";
+        }
+      }
+    </script>
   </body>
 </html>
