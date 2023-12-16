@@ -48,14 +48,12 @@
   </head>
   <body class="min-h-[100vh]">
     <div class="border-b-[2px]">
-      <div class="bg-gray-100 px-8 py-2 flex justify-between items-center">
+      <div class="px-8 py-2 flex justify-between items-center">
         <div class="flex items-center gap-2">
           <div class="mr-6 relative">
-            <h1 class="select-none">Automata Simulation</h1>
-            <span
-              class="bg-yellow-300 px-1 rounded text-[10px] absolute right-[-5px] top-[-5px]"
-              >BETA</span
-            >
+            <h1 class="select-none">
+              <img src="/logo.png" alt="Automata Simulation - UFPS" />
+            </h1>
           </div>
 
           <div class="pr-2">
@@ -164,7 +162,8 @@
         </p>
 
         <p class="font-bold underline">
-          At the moment, it only works with DFA (Deterministic Finite Automata).
+          Currently supports AFD, AFND, AFN with null transitions and turing
+          machines.
         </p>
       </div>
 
@@ -190,16 +189,10 @@
             <i class="fa-solid fa-square-check"></i> Support to AFND and AFN λ
           </li>
           <li>
-            <i class="fa-regular fa-square-check"></i> Generate transition table
+            <i class="fa-solid fa-square-check"></i> Generate transition table
           </li>
           <li>
-            <i class="fa-regular fa-square-check"></i> Generate automata from
-            the transition table and viceversa
-          </li>
-          <li><i class="fa-regular fa-square-check"></i> Run step by step</li>
-          <li>
-            <i class="fa-regular fa-square-check"></i> Customize animation
-            velocity
+            <i class="fa-solid fa-square-check"></i> Support Turing Machine
           </li>
         </ul>
       </div>
