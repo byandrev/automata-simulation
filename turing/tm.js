@@ -47,14 +47,19 @@ function run() {
 
     let i = 0;
 
+    //console.log(machine);
+
     while (!machine.finalStates.includes(currentState) && i < LIMIT) {
       currentSymbol = currentTape[currentHead];
 
-      const state = currentState
-        ? machine.transitions[currentState].filter(
-            (el) => el[1] == currentSymbol
-          )
-        : [];
+      const state =
+        currentState &&
+        machine.transitions[currentState] &&
+        machine.transitions[currentState].length > 0
+          ? machine.transitions[currentState].filter(
+              (el) => el[1] == currentSymbol
+            )
+          : [];
 
       // Transicion
       if (state && state.length === 1) {
@@ -90,13 +95,13 @@ function run() {
   running = false;
   const res = verify(machine);
 
-  console.log("Resultado: " + res);
-  console.log(steps);
+  //console.log("Resultado: " + res);
+  //console.log(steps);
 
-  console.log("Tape: ");
-  console.log(currentTape);
+  //console.log("Tape: ");
+  //console.log(currentTape);
 
-  console.log("Head: ", currentHead);
+  //console.log("Head: ", currentHead);
 
   let indexStep = 0;
 
@@ -108,13 +113,13 @@ function run() {
     }
 
     const step = steps[indexStep];
-    console.log(step);
+    //console.log(step);
     setTape(step[5], tape, head);
     moveTape(step[4] === "R" ? "right" : "left", tape, head);
     renderTape(tape, head);
-    console.log("Head => ", head);
+    //console.log("Head => ", head);
 
-    console.log(tape);
+    //console.log(tape);
 
     animateNode(
       paper,

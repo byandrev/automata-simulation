@@ -83,14 +83,14 @@ function run() {
   automata.finalStates = finalStates;
   automata.transitions = transitions;
 
-  console.log(automata);
+  //console.log(automata);
 
   renderOut("Loading ...");
   renderOutString(string);
   // verifyAFD(paper, graph, automata, string);
 
   const res = verifyAFND(paper, graph, automata, string);
-  console.log(res);
+  //console.log(res);
 }
 
 function changeLabelName() {
