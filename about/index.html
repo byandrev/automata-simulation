@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Automata Simulation</title>
+    <title>About Us - Automata Simulation</title>
     <link rel="icon" href="/icon.png" />
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="src/styles.css" />
+    <link rel="stylesheet" href="../src/styles.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
@@ -47,7 +47,7 @@
       referrerpolicy="no-referrer"
     ></script>
   </head>
-  <body class="min-h-[100vh]">
+  <body>
     <div class="border-b-[2px]">
       <div class="px-8 py-2 flex justify-between items-center">
         <div class="flex items-center gap-2">
@@ -58,60 +58,14 @@
               /></a>
             </h1>
           </div>
-
-          <div class="pr-2">
-            <i class="fa-solid fa-screwdriver-wrench"></i>
-          </div>
-
-          <div
-            class="element bg-white cursor-pointer select-none rounded-full border-2 w-8 h-8 text-center leading-6 text-xs"
-            draggable="true"
-            title="State"
-          >
-            q
-          </div>
-
-          <div
-            class="element bg-white cursor-pointer select-none rounded-full border-2 w-8 h-8 text-center leading-6 text-xs"
-            draggable="true"
-            title="Final State"
-          >
-            qf
-          </div>
-
-          <div
-            class="bg-white cursor-pointer select-none rounded-full border-2 w-8 h-8 text-center leading-6 text-xs"
-            title="Clear all"
-            id="btn-clear-all"
-          >
-            <i class="fa-solid fa-trash-can text-[10px]"></i>
-          </div>
-
-          <div
-            class="bg-white cursor-pointer select-none rounded-full border-2 w-8 h-8 text-center leading-6 text-xs"
-            title="Download"
-            id="btn-download"
-          >
-            <i class="fa-solid fa-cloud-arrow-down text-[10px]"></i>
-          </div>
-
-          <select
-            id="changeSim"
-            class="change-simulator"
-            onchange="changeSimulator()"
-          >
-            <option value="Automata-Simulator">AFD Simulator</option>
-
-            <option value="Turing-Machine-Simulator">TM Simulator</option>
-          </select>
         </div>
 
         <div class="flex items-center gap-4">
-          <a href="#how-to-use" class="text-sm underline">How to use?</a>
           <a href="/about/" class="text-sm underline">About Us</a>
 
           <div class="flex gap-4">
             <a
+              rel="noopener"
               target="_blank"
               href="https://github.com/byandrev/automata-simulation"
               class="bg-gray-600 shadow text-white flex items-center gap-2 rounded px-2 py-1"
@@ -121,35 +75,6 @@
             ></a>
           </div>
         </div>
-      </div>
-    </div>
-
-    <div class="split at">
-      <div id="paper" class="overflow-hidden"></div>
-      <div id="split-1" class="bg-gray-100 p-4 border-b-2">
-        <div class="flex items-center gap-2">
-          <input
-            type="text"
-            id="input-string"
-            placeholder="String"
-            class="w-full px-1 h-8 text-xs rounded border-2 border-slate-200 bg-slate-100"
-          />
-
-          <button
-            id="run"
-            class="rounded flex items-center gap-2 shadow px-4 h-8 text-xs bg-blue-500 text-white hover:bg-blue-600 active:bg-blue-500"
-          >
-            <i class="fa-solid fa-play"></i>
-            Run
-          </button>
-        </div>
-
-        <div class="mt-4">
-          <p><span id="out"></span></p>
-          <p class="mt-2 text-xl" id="string-out"></p>
-        </div>
-
-        <div class="mt-8" id="error"></div>
       </div>
     </div>
 
@@ -171,18 +96,58 @@
         </p>
       </div>
 
-      <div class="max-w-[800px] mx-auto">
-        <video
-          loop="true"
-          autoplay="true"
-          src="/example-use.mp4"
-          class="border-2 rounded"
-          alt="create, modify, and simulate automata"
-        ></video>
+      <h2 class="text-2xl font-bold mb-0">Team</h2>
+      <div class="mt-4 my-10 flex gap-4 justify-around text-center">
+        <div class="gap-4 mb-4">
+          <img
+            class="w-[80px] rounded-full mx-auto mb-2"
+            src="https://avatars.githubusercontent.com/u/120739623?v=4"
+            alt="Andres Parra Garzon"
+          />
+          <div>
+            <h4 class="text-xl font-bold">Andres Parra</h4>
+            <a
+              target="_blank"
+              href="https://github.com/byandrev"
+              class="text-gray-500"
+              >Github</a
+            >
+          </div>
+        </div>
 
-        <p class="text-center text-sm font-bold underline">
-          Rename states and transitions with double click
-        </p>
+        <div class="gap-4 mb-4">
+          <img
+            class="w-[80px] rounded-full mx-auto mb-2"
+            src="https://avatars.githubusercontent.com/u/127999342?v=4"
+            alt="Mauricio Di Donato"
+          />
+          <div>
+            <h4 class="text-xl font-bold">Mauricio Di Donato</h4>
+            <a
+              target="_blank"
+              href="https://github.com/MauricioDDS"
+              class="text-gray-500"
+              >Github</a
+            >
+          </div>
+        </div>
+
+        <div class="gap-4">
+          <img
+            class="w-[80px] h-[80px] rounded-full mx-auto mb-2"
+            src="https://avatars.githubusercontent.com/u/114622930?v=4"
+            alt="Alessandro Daniele"
+          />
+          <div>
+            <h4 class="text-xl font-bold">Alessandro Daniele</h4>
+            <a
+              target="_blank"
+              href="https://github.com/AlessandroDani"
+              class="text-gray-500"
+              >Github</a
+            >
+          </div>
+        </div>
       </div>
 
       <div class="my-10">
@@ -274,6 +239,7 @@
         <p>Automata Simulation</p>
         <p>
           <a
+            rel="noopener"
             target="_blank"
             href="https://ww2.ufps.edu.co"
             class="text-blue-500 underline"
@@ -285,64 +251,6 @@
 
       <p>Development with ❤️</p>
     </footer>
-
-    <div
-      class="modal micromodal-slide"
-      id="modal-label-name"
-      aria-hidden="true"
-    >
-      <div class="modal__overlay" tabindex="-1" data-micromodal-close>
-        <div
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="modal-1-title"
-          class="modal__container relative pt-4"
-        >
-          <span
-            class="absolute top-[2px] left-0 text-xs bg-yellow-300 px-2 rounded-t"
-            >Label name</span
-          >
-          <input
-            type="text"
-            id="input-label-name"
-            class="p-2 rounded border-2"
-          />
-          <!-- <button id="btn-label-name" class="modal__btn modal__btn-primary">
-            Save
-          </button> -->
-        </div>
-      </div>
-    </div>
-
-    <div
-      class="modal micromodal-slide"
-      id="modal-state-name"
-      aria-hidden="true"
-    >
-      <div class="modal__overlay" tabindex="-1" data-micromodal-close>
-        <div
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="modal-1-title"
-          class="modal__container relative pt-4"
-        >
-          <span
-            class="absolute top-[2px] left-0 text-xs bg-yellow-300 px-2 rounded-t"
-            >State name</span
-          >
-          <input
-            type="text"
-            id="input-state-name"
-            class="p-2 rounded border-2"
-          />
-          <!-- <button id="btn-state-name" class="modal__btn modal__btn-primary">
-            Save
-          </button> -->
-        </div>
-      </div>
-    </div>
-
-    <script src="src/main.js" type="module"></script>
 
     <script>
       function changeSimulator(e) {

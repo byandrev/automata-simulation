@@ -6,6 +6,7 @@ module.exports = {
       input: {
         main: resolve(__dirname, "index.html"),
         turing: resolve(__dirname, "turing/index.html"),
+        about: resolve(__dirname, "about/index.html"),
       },
     },
   },
