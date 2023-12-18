@@ -343,13 +343,12 @@
     <script>
       function changeSimulator(e) {
         const select = document.querySelector("#changeSim");
-        console.log(select.value);
         const currentPath = window.location.pathname;
 
         if (select.value === "Automata-Simulator") {
           window.location.href = "/";
         } else {
-          window.location.href = "/turing-machine.html";
+          window.location.href = "/turing/";
         }
       }
     </script>

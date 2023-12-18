@@ -13,8 +13,10 @@ function dragLeave(e) {}
 function drop(e, graph) {
   const className = e.dataTransfer.getData("text/plain");
 
+  let paddingY = window.location.pathname.includes("turing") ? 170 : 70;
+
   const circle = new CircleShape({
-    position: { x: e.clientX - NODE_WIDTH / 2, y: e.clientY - 70 },
+    position: { x: e.clientX - NODE_WIDTH / 2, y: e.clientY - paddingY },
     attrs: {
       label: {
         text: className,

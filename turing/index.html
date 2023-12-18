@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Turing Machine - Automata Simulation</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    
+    <link rel="stylesheet" href="../src/styles.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
@@ -45,9 +45,6 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
-    <script type="module" crossorigin src="/assets/turing-46a92100.js"></script>
-    <link rel="modulepreload" crossorigin href="/assets/download-b8e6c2a9.js">
-    <link rel="stylesheet" href="/assets/download-c8c9ed13.css">
   </head>
   <body>
     <div class="border-b-[2px]">
@@ -390,18 +387,17 @@
       </div>
     </div>
 
-    
+    <script src="./tm.js" type="module"></script>
 
     <script>
       function changeSimulator(e) {
         const select = document.querySelector("#changeSim");
-        console.log(select.value);
         const currentPath = window.location.pathname;
 
         if (select.value === "Automata-Simulator") {
           window.location.href = "/";
         } else {
-          window.location.href = "/turing-machine.html";
+          window.location.href = "/turing/";
         }
       }
     </script>

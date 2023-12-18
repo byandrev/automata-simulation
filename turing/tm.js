@@ -1,11 +1,11 @@
 import MicroModal from "micromodal";
 
-import { animateNode } from "./animateNode.js";
-import { clearAutomata, createAutomata } from "./automata.js";
-import { startDragTools } from "./dragTools.js";
-import { initGraph } from "./graph.js";
-import { CircleShape, FILL_NODE_FINAL } from "./shapes.js";
-import download from "./utils/download.js";
+import { animateNode } from "../src/animateNode.js";
+import { clearAutomata, createAutomata } from "../src/automata.js";
+import { startDragTools } from "../src/dragTools.js";
+import { initGraph } from "../src/graph.js";
+import { CircleShape, FILL_NODE_FINAL } from "../src/shapes.js";
+import download from "../src/utils/download.js";
 
 const { graph, paper } = initGraph();
 const inputString = document.querySelector("#input-string");
